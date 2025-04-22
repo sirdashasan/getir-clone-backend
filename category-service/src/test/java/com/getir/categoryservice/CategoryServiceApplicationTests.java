@@ -1,4 +1,4 @@
-package com.getir.category_service;
+package com.getir.categoryservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
