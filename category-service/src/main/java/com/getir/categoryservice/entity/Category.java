@@ -13,17 +13,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class Category {
-
     @Id
     @GeneratedValue
     private UUID id;
 
+    @Column(name = "name_tr", nullable = false)
+    private String nameTr;
+
+    @Column(name = "name_en")
+    private String nameEn;
+
+    private String image;
+
     @Column(nullable = false, unique = true)
     private String slug;
-
-    @Column(nullable = false)
-    private String title;
-
-    @Column(columnDefinition = "TEXT")
-    private String image;
 }
