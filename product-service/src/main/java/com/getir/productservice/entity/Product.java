@@ -41,7 +41,7 @@ public class Product {
     @Column(name = "old_price")
     private Double oldPrice;
 
-    private String quantity;
+    private Integer quantity;
     private String image;
 
     @Column(columnDefinition = "TEXT")

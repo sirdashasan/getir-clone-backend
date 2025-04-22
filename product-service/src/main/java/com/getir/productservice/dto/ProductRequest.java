@@ -1,16 +1,15 @@
 package com.getir.productservice.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductResponse {
-    private UUID id;
+public class ProductRequest {
     private String nameTr;
     private String nameEn;
     private String slug;
@@ -22,3 +21,4 @@ public class ProductResponse {
     private Integer quantity;
     private String image;
 }
+
