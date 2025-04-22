@@ -8,7 +8,8 @@ import java.util.UUID;
 
 public interface CategoryService {
     List<CategoryResponse> getAllCategories();
-    CategoryResponse getCategoryBySlug(String slug);
+    CategoryResponse getCategoryBySlugTr(String slugTr);
+    CategoryResponse getCategoryBySlugEn(String slugEn);
     CategoryResponse createCategory(CategoryRequest request);
     CategoryResponse updateCategory(UUID id, CategoryRequest request);
     void deleteCategory(UUID id);

@@ -24,9 +24,15 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    @GetMapping("/slug/{slug}")
-    public ResponseEntity<CategoryResponse> getBySlug(@PathVariable String slug) {
-        return ResponseEntity.ok(categoryService.getCategoryBySlug(slug));
+
+    @GetMapping("/slug-tr/{slug}")
+    public ResponseEntity<CategoryResponse> getBySlugTr(@PathVariable String slug) {
+        return ResponseEntity.ok(categoryService.getCategoryBySlugTr(slug));
+    }
+
+    @GetMapping("/slug-en/{slug}")
+    public ResponseEntity<CategoryResponse> getBySlugEn(@PathVariable String slug) {
+        return ResponseEntity.ok(categoryService.getCategoryBySlugEn(slug));
     }
 
     @PostMapping

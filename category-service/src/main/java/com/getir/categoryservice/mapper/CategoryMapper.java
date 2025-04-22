@@ -14,7 +14,8 @@ public class CategoryMapper {
                 .nameTr(category.getNameTr())
                 .nameEn(category.getNameEn())
                 .image(category.getImage())
-                .slug(category.getSlug())
+                .slugTr(category.getSlugTr())
+                .slugEn(category.getSlugEn())
                 .build();
     }
 
@@ -23,7 +24,8 @@ public class CategoryMapper {
                 .nameTr(request.getNameTr())
                 .nameEn(request.getNameEn())
                 .image(request.getImage())
-                .slug(request.getSlug())
+                .slugTr(request.getSlugTr().toLowerCase())
+                .slugEn(request.getSlugEn().toLowerCase())
                 .build();
     }
 
@@ -31,6 +33,7 @@ public class CategoryMapper {
         category.setNameTr(request.getNameTr());
         category.setNameEn(request.getNameEn());
         category.setImage(request.getImage());
-        category.setSlug(request.getSlug());
+        category.setSlugTr(request.getSlugTr().toLowerCase());
+        category.setSlugEn(request.getSlugEn().toLowerCase());
     }
 }

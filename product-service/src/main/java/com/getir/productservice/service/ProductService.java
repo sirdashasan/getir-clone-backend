@@ -8,7 +8,8 @@ import java.util.UUID;
 
 public interface ProductService {
     List<ProductResponse> getAllProducts();
-    ProductResponse getProductBySlug(String slug);
+    ProductResponse getProductBySlugTr(String slugTr);
+    ProductResponse getProductBySlugEn(String slugEn);
     ProductResponse createProduct(ProductRequest request);
     ProductResponse updateProduct(UUID id, ProductRequest request);
     void deleteProduct(UUID id);

@@ -30,20 +30,32 @@ public class ProductManager implements ProductService {
     }
 
     @Override
-    public ProductResponse getProductBySlug(String slug) {
-        Product product = productRepository.findBySlug(slug);
+    public ProductResponse getProductBySlugTr(String slugTr) {
+        Product product = productRepository.findBySlugTr(slugTr);
         if (product == null) {
-            throw new ApiException("Product not found with slug: " + slug, HttpStatus.NOT_FOUND);
+            throw new ApiException("Product not found with slugTr: " + slugTr, HttpStatus.NOT_FOUND);
+        }
+        return productMapper.toResponse(product);
+    }
+
+    @Override
+    public ProductResponse getProductBySlugEn(String slugEn) {
+        Product product = productRepository.findBySlugEn(slugEn);
+        if (product == null) {
+            throw new ApiException("Product not found with slugEn: " + slugEn, HttpStatus.NOT_FOUND);
         }
         return productMapper.toResponse(product);
     }
 
     @Override
     public ProductResponse createProduct(ProductRequest request) {
-        boolean exists = productRepository.findBySlug(request.getSlug()) != null;
-        if (exists) {
-            throw new ApiException("A product with slug '" + request.getSlug() + "' already exists", HttpStatus.BAD_REQUEST);
+        boolean existsTr = productRepository.findBySlugTr(request.getSlugTr()) != null;
+        boolean existsEn = productRepository.findBySlugEn(request.getSlugEn()) != null;
+
+        if (existsTr || existsEn) {
+            throw new ApiException("Product with same slugTr or slugEn already exists", HttpStatus.BAD_REQUEST);
         }
+
         Product product = productMapper.toEntity(request);
         Product saved = productRepository.save(product);
         return productMapper.toResponse(saved);

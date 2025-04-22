@@ -16,8 +16,11 @@ public class ProductRequest {
     @NotBlank(message = "nameEn must not be blank")
     private String nameEn;
 
-    @NotBlank(message = "slug must not be blank")
-    private String slug;
+    @NotBlank(message = "slugTr must not be blank")
+    private String slugTr;
+
+    @NotBlank(message = "slugEn must not be blank")
+    private String slugEn;
 
     @NotBlank(message = "categorySlug must not be blank")
     private String categorySlug;

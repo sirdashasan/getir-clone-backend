@@ -13,7 +13,8 @@ public class ProductResponse {
     private UUID id;
     private String nameTr;
     private String nameEn;
-    private String slug;
+    private String slugTr;
+    private String slugEn;
     private String categorySlug;
     private String subcategoryTr;
     private String subcategoryEn;

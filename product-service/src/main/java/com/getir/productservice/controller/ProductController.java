@@ -26,9 +26,14 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/slug/{slug}")
-    public ResponseEntity<ProductResponse> getBySlug(@PathVariable String slug) {
-        return ResponseEntity.ok(productService.getProductBySlug(slug));
+    @GetMapping("/slug-tr/{slug}")
+    public ResponseEntity<ProductResponse> getBySlugTr(@PathVariable String slug) {
+        return ResponseEntity.ok(productService.getProductBySlugTr(slug));
+    }
+
+    @GetMapping("/slug-en/{slug}")
+    public ResponseEntity<ProductResponse> getBySlugEn(@PathVariable String slug) {
+        return ResponseEntity.ok(productService.getProductBySlugEn(slug));
     }
 
 

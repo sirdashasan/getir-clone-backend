@@ -14,7 +14,8 @@ public class ProductMapper {
                 .id(product.getId())
                 .nameTr(product.getNameTr())
                 .nameEn(product.getNameEn())
-                .slug(product.getSlug())
+                .slugTr(product.getSlugTr())
+                .slugEn(product.getSlugEn())
                 .categorySlug(product.getCategorySlug())
                 .subcategoryTr(product.getSubcategoryTr())
                 .subcategoryEn(product.getSubcategoryEn())
@@ -29,7 +30,8 @@ public class ProductMapper {
         return Product.builder()
                 .nameTr(request.getNameTr())
                 .nameEn(request.getNameEn())
-                .slug(request.getSlug())
+                .slugTr(request.getSlugTr().toLowerCase())
+                .slugEn(request.getSlugEn().toLowerCase())
                 .categorySlug(request.getCategorySlug())
                 .subcategoryTr(request.getSubcategoryTr())
                 .subcategoryEn(request.getSubcategoryEn())
@@ -43,7 +45,8 @@ public class ProductMapper {
     public void updateEntity(Product product, ProductRequest request) {
         product.setNameTr(request.getNameTr());
         product.setNameEn(request.getNameEn());
-        product.setSlug(request.getSlug());
+        product.setSlugTr(request.getSlugTr().toLowerCase());
+        product.setSlugEn(request.getSlugEn().toLowerCase());
         product.setCategorySlug(request.getCategorySlug());
         product.setSubcategoryTr(request.getSubcategoryTr());
         product.setSubcategoryEn(request.getSubcategoryEn());

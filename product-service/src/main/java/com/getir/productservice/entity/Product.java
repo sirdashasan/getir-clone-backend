@@ -24,8 +24,11 @@ public class Product {
     @Column(name = "name_en")
     private String nameEn;
 
-    @Column(nullable = false, unique = true)
-    private String slug;
+    @Column(name = "slug_tr", nullable = false, unique = true)
+    private String slugTr;
+
+    @Column(name = "slug_en", nullable = false, unique = true)
+    private String slugEn;
 
     @Column(name = "category_slug" , nullable = false)
     private String categorySlug;
