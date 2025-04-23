@@ -1,0 +1,39 @@
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  category-service:
+    build:
+      context: ./category-service
+    ports:
+      - "8082:8082"
+    image: category-service
+    container_name: category-service
+    depends_on:
+      - db
+    env_file:
+          - ./category-service/.env
+
+  product-service:
+    build:
+      context: ./product-service
+    ports:
+      - "8081:8081"
+    image: product-service
+    container_name: product-service
+    depends_on:
+      - db
+    env_file:
+      - ./product-service/.env
+
+volumes:
+  postgres_data:
