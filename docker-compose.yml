@@ -1,11 +1,13 @@
-
+version: '3.8'
 services:
   db:
     image: postgres:15
     container_name: postgres
     restart: always
-    env_file:
-      - .env
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1828
+      POSTGRES_DB: getir_category_db
     ports:
       - "5433:5432"
     volumes:
@@ -21,7 +23,7 @@ services:
     depends_on:
       - db
     env_file:
-          - ./category-service/.env
+      - ./category-service/.env
 
   product-service:
     build:
@@ -34,6 +36,17 @@ services:
       - db
     env_file:
       - ./product-service/.env
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+    ports:
+      - "8080:8080"
+    image: api-gateway
+    container_name: api-gateway
+    depends_on:
+      - category-service
+      - product-service
 
 volumes:
   postgres_data:
