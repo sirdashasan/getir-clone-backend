@@ -3,10 +3,12 @@ package com.getir.subcategoryservice.service;
 import com.getir.subcategoryservice.dto.SubcategoryRequest;
 import com.getir.subcategoryservice.dto.SubcategoryResponse;
 import com.getir.subcategoryservice.entity.Subcategory;
+import com.getir.subcategoryservice.exceptions.ApiException;
 import com.getir.subcategoryservice.mapper.SubcategoryMapper;
 import com.getir.subcategoryservice.repository.SubcategoryRepository;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +34,7 @@ public class SubcategoryManager implements SubcategoryService {
     public SubcategoryResponse getBySlugTr(String slugTr) {
         Subcategory subCategory = subcategoryRepository.findBySlugTr(slugTr);
         if (subCategory == null) {
-            throw new RuntimeException("Subcategory not found with slugTr: " + slugTr);
+            throw new ApiException("Subcategory not found with slugEn: " + slugTr, HttpStatus.NOT_FOUND);
         }
         return subcategoryMapper.toResponse(subCategory);
     }
@@ -41,7 +43,7 @@ public class SubcategoryManager implements SubcategoryService {
     public SubcategoryResponse getBySlugEn(String slugEn) {
         Subcategory subCategory = subcategoryRepository.findBySlugEn(slugEn);
         if (subCategory == null) {
-            throw new RuntimeException("Subcategory not found with slugEn: " + slugEn);
+            throw new ApiException("Subcategory not found with slugEn: " + slugEn, HttpStatus.NOT_FOUND);
         }
         return subcategoryMapper.toResponse(subCategory);
     }
@@ -52,7 +54,7 @@ public class SubcategoryManager implements SubcategoryService {
         boolean existsEn = subcategoryRepository.findBySlugEn(request.getSlugEn()) != null;
 
         if (existsTr || existsEn) {
-            throw new RuntimeException("Subcategory with same slugTr or slugEn already exists");
+            throw new ApiException("Subcategory with same slugTr or slugEn already exists", HttpStatus.BAD_REQUEST);
         }
 
         Subcategory subCategory = subcategoryMapper.toEntity(request);
@@ -63,7 +65,7 @@ public class SubcategoryManager implements SubcategoryService {
     @Override
     public SubcategoryResponse updateSubcategory(UUID id, SubcategoryRequest request) {
         Subcategory subCategory = subcategoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Subcategory not found with id: " + id));
+                .orElseThrow(() -> new ApiException("Subcategory not found with id: " + id, HttpStatus.NOT_FOUND));
         subcategoryMapper.updateEntity(subCategory, request);
         return subcategoryMapper.toResponse(subcategoryRepository.save(subCategory));
     }
@@ -72,7 +74,7 @@ public class SubcategoryManager implements SubcategoryService {
     public void deleteSubcategory(UUID id) {
         boolean exists = subcategoryRepository.existsById(id);
         if (!exists) {
-            throw new RuntimeException("Subcategory not found with id: " + id);
+            throw new ApiException("Subcategory not found with id: " + id, HttpStatus.NOT_FOUND);
         }
         subcategoryRepository.deleteById(id);
     }

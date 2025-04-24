@@ -3,6 +3,7 @@ package com.getir.subcategoryservice.controller;
 import com.getir.subcategoryservice.dto.SubcategoryRequest;
 import com.getir.subcategoryservice.dto.SubcategoryResponse;
 import com.getir.subcategoryservice.service.SubcategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +35,12 @@ public class SubcategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<SubcategoryResponse> create(@RequestBody SubcategoryRequest request) {
+    public ResponseEntity<SubcategoryResponse> create(@Valid @RequestBody SubcategoryRequest request) {
         return new ResponseEntity<>(subcategoryService.createSubcategory(request), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SubcategoryResponse> update(@PathVariable UUID id, @RequestBody SubcategoryRequest request) {
+    public ResponseEntity<SubcategoryResponse> update(@PathVariable UUID id,@Valid  @RequestBody SubcategoryRequest request) {
         return ResponseEntity.ok(subcategoryService.updateSubcategory(id, request));
     }
 
