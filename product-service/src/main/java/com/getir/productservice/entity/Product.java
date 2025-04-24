@@ -30,14 +30,17 @@ public class Product {
     @Column(name = "slug_en", nullable = false, unique = true)
     private String slugEn;
 
-    @Column(name = "category_slug" , nullable = false)
-    private String categorySlug;
+    @Column(name = "category_slug_tr", nullable = false)
+    private String categorySlugTr;
 
-    @Column(name = "subcategory_tr")
-    private String subcategoryTr;
+    @Column(name = "category_slug_en", nullable = false)
+    private String categorySlugEn;
 
-    @Column(name = "subcategory_en")
-    private String subcategoryEn;
+    @Column(name = "subcategory_slug_tr")
+    private String subcategorySlugTr;
+
+    @Column(name = "subcategory_slug_en")
+    private String subcategorySlugEn;
 
     private Double price;
 

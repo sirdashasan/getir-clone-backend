@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1828
-      POSTGRES_DB: getir_category_db
+      POSTGRES_DB: getir_product_db
     ports:
       - "5433:5432"
     volumes:
@@ -36,6 +36,18 @@ services:
       - db
     env_file:
       - ./product-service/.env
+
+  subcategory-service:
+    build:
+      context: ./subcategory-service
+    ports:
+      - "8083:8083"
+    image: subcategory-service
+    container_name: subcategory-service
+    depends_on:
+      - db
+    env_file:
+      - ./subcategory-service/.env
 
   api-gateway:
     build:

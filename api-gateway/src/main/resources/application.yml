@@ -20,3 +20,8 @@ spring:
           uri: http://product-service:8081
           predicates:
             - Path=/getir/api/products/**
+
+        - id: subcategory-service
+          uri: http://subcategory-service:8083
+          predicates:
+            - Path=/getir/api/subcategories/**

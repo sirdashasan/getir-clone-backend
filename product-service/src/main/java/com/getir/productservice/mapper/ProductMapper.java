@@ -16,9 +16,10 @@ public class ProductMapper {
                 .nameEn(product.getNameEn())
                 .slugTr(product.getSlugTr())
                 .slugEn(product.getSlugEn())
-                .categorySlug(product.getCategorySlug())
-                .subcategoryTr(product.getSubcategoryTr())
-                .subcategoryEn(product.getSubcategoryEn())
+                .categorySlugTr(product.getCategorySlugTr())
+                .categorySlugEn(product.getCategorySlugEn())
+                .subcategorySlugTr(product.getSubcategorySlugTr())
+                .subcategorySlugEn(product.getSubcategorySlugEn())
                 .price(product.getPrice())
                 .oldPrice(product.getOldPrice())
                 .quantity(product.getQuantity())
@@ -32,9 +33,10 @@ public class ProductMapper {
                 .nameEn(request.getNameEn())
                 .slugTr(request.getSlugTr().toLowerCase())
                 .slugEn(request.getSlugEn().toLowerCase())
-                .categorySlug(request.getCategorySlug())
-                .subcategoryTr(request.getSubcategoryTr())
-                .subcategoryEn(request.getSubcategoryEn())
+                .categorySlugTr(request.getCategorySlugTr().toLowerCase())
+                .categorySlugEn(request.getCategorySlugEn().toLowerCase())
+                .subcategorySlugTr(request.getSubcategorySlugTr().toLowerCase())
+                .subcategorySlugEn(request.getSubcategorySlugEn().toLowerCase())
                 .price(request.getPrice())
                 .oldPrice(request.getOldPrice())
                 .quantity(request.getQuantity())
@@ -47,9 +49,10 @@ public class ProductMapper {
         product.setNameEn(request.getNameEn());
         product.setSlugTr(request.getSlugTr().toLowerCase());
         product.setSlugEn(request.getSlugEn().toLowerCase());
-        product.setCategorySlug(request.getCategorySlug());
-        product.setSubcategoryTr(request.getSubcategoryTr());
-        product.setSubcategoryEn(request.getSubcategoryEn());
+        product.setCategorySlugTr(request.getCategorySlugTr().toLowerCase());
+        product.setCategorySlugEn(request.getCategorySlugEn().toLowerCase());
+        product.setSubcategorySlugTr(request.getSubcategorySlugTr().toLowerCase());
+        product.setSubcategorySlugEn(request.getSubcategorySlugEn().toLowerCase());
         product.setPrice(request.getPrice());
         product.setOldPrice(request.getOldPrice());
         product.setQuantity(request.getQuantity());

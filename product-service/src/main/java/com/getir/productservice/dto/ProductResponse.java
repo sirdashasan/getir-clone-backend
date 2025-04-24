@@ -15,9 +15,10 @@ public class ProductResponse {
     private String nameEn;
     private String slugTr;
     private String slugEn;
-    private String categorySlug;
-    private String subcategoryTr;
-    private String subcategoryEn;
+    private String categorySlugTr;
+    private String categorySlugEn;
+    private String subcategorySlugTr;
+    private String subcategorySlugEn;
     private Double price;
     private Double oldPrice;
     private Integer quantity;

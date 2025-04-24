@@ -22,14 +22,17 @@ public class ProductRequest {
     @NotBlank(message = "slugEn must not be blank")
     private String slugEn;
 
-    @NotBlank(message = "categorySlug must not be blank")
-    private String categorySlug;
+    @NotBlank(message = "categorySlugTr must not be blank")
+    private String categorySlugTr;
 
-    @NotBlank(message = "subcategoryTr must not be blank")
-    private String subcategoryTr;
+    @NotBlank(message = "categorySlugEn must not be blank")
+    private String categorySlugEn;
 
-    @NotBlank(message = "subcategoryEn must not be blank")
-    private String subcategoryEn;
+    @NotBlank(message = "subcategorySlugTr must not be blank")
+    private String subcategorySlugTr;
+
+    @NotBlank(message = "subcategorySlugEn must not be blank")
+    private String subcategorySlugEn;
 
     @NotNull(message = "price must not be null")
     private Double price;
