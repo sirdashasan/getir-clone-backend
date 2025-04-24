@@ -26,12 +26,12 @@ public class SubcategoryController {
 
     @GetMapping("/slug-tr/{slug}")
     public ResponseEntity<SubcategoryResponse> getBySlugTr(@PathVariable String slug) {
-        return ResponseEntity.ok(subcategoryService.getBySlugTr(slug));
+        return ResponseEntity.ok(subcategoryService.getSubcategoriesBySlugTr(slug));
     }
 
     @GetMapping("/slug-en/{slug}")
     public ResponseEntity<SubcategoryResponse> getBySlugEn(@PathVariable String slug) {
-        return ResponseEntity.ok(subcategoryService.getBySlugEn(slug));
+        return ResponseEntity.ok(subcategoryService.getSubcategoriesBySlugEn(slug));
     }
 
     @PostMapping

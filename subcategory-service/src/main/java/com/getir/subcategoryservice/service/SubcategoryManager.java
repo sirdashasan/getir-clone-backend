@@ -31,7 +31,7 @@ public class SubcategoryManager implements SubcategoryService {
     }
 
     @Override
-    public SubcategoryResponse getBySlugTr(String slugTr) {
+    public SubcategoryResponse getSubcategoriesBySlugTr(String slugTr) {
         Subcategory subCategory = subcategoryRepository.findBySlugTr(slugTr);
         if (subCategory == null) {
             throw new ApiException("Subcategory not found with slugEn: " + slugTr, HttpStatus.NOT_FOUND);
@@ -40,7 +40,7 @@ public class SubcategoryManager implements SubcategoryService {
     }
 
     @Override
-    public SubcategoryResponse getBySlugEn(String slugEn) {
+    public SubcategoryResponse getSubcategoriesBySlugEn(String slugEn) {
         Subcategory subCategory = subcategoryRepository.findBySlugEn(slugEn);
         if (subCategory == null) {
             throw new ApiException("Subcategory not found with slugEn: " + slugEn, HttpStatus.NOT_FOUND);

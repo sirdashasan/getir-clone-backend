@@ -8,8 +8,8 @@ import java.util.UUID;
 
 public interface SubcategoryService {
     List<SubcategoryResponse> getAllSubcategories();
-    SubcategoryResponse getBySlugTr(String slugTr);
-    SubcategoryResponse getBySlugEn(String slugEn);
+    SubcategoryResponse getSubcategoriesBySlugTr(String slugTr);
+    SubcategoryResponse getSubcategoriesBySlugEn(String slugEn);
     SubcategoryResponse createSubcategory(SubcategoryRequest request);
     SubcategoryResponse updateSubcategory(UUID id, SubcategoryRequest request);
     void deleteSubcategory(UUID id);

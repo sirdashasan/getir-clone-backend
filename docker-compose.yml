@@ -59,6 +59,7 @@ services:
     depends_on:
       - category-service
       - product-service
+      - subcategory-service
 
 volumes:
   postgres_data:

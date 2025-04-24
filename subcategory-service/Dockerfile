@@ -2,7 +2,7 @@
 FROM openjdk:17-jdk-slim
 
 # Copy the application jar file
-COPY target/product-service-*.jar app.jar
+COPY target/subcategory-service-*.jar app.jar
 
 # Copy the .env file
 COPY .env .env
