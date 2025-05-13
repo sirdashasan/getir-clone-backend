@@ -1,9 +1,9 @@
 package com.getir.categoryservice.controller;
 
 import com.getir.categoryservice.dto.CategoryRequest;
-import com.getir.categoryservice.dto.CategoryResponse;
-import com.getir.categoryservice.service.CategoryService;
 
+import com.getir.categoryservice.service.CategoryService;
+import com.getir.dto.CategoryResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

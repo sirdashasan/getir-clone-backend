@@ -1,11 +1,15 @@
 package com.getir.productservice.service;
 
+import com.getir.dto.CategoryResponse;
 import com.getir.productservice.dto.ProductRequest;
 import com.getir.productservice.dto.ProductResponse;
 import com.getir.productservice.entity.Product;
 import com.getir.productservice.exceptions.ApiException;
 import com.getir.productservice.mapper.ProductMapper;
 import com.getir.productservice.repository.ProductRepository;
+import com.getir.productservice.service.client.CategoryClient;
+import com.getir.productservice.service.client.SubcategoryClient;
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,8 @@ public class ProductManager implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final CategoryClient categoryClient;
+    private final SubcategoryClient subcategoryClient;
 
     @Override
     public List<ProductResponse> getAllProducts() {
@@ -54,6 +60,32 @@ public class ProductManager implements ProductService {
 
         if (existsTr || existsEn) {
             throw new ApiException("Product with same slugTr or slugEn already exists", HttpStatus.BAD_REQUEST);
+        }
+
+        // Category control - feign
+        try {
+            categoryClient.getBySlugTr(request.getCategorySlugTr());
+        } catch (FeignException.NotFound e) {
+            throw new ApiException("Category not found with slugTr: " + request.getCategorySlugTr(), HttpStatus.NOT_FOUND);
+        }
+
+        try {
+            categoryClient.getBySlugEn(request.getCategorySlugEn());
+        } catch (FeignException.NotFound e) {
+            throw new ApiException("Category not found with slugEn: " + request.getCategorySlugEn(), HttpStatus.NOT_FOUND);
+        }
+
+        // Subcategory control - feign
+        try {
+            subcategoryClient.getBySlugTr(request.getSubcategorySlugTr());
+        } catch (FeignException.NotFound e) {
+            throw new ApiException("Subcategory not found with slugTr: " + request.getSubcategorySlugTr(), HttpStatus.NOT_FOUND);
+        }
+
+        try {
+            subcategoryClient.getBySlugEn(request.getSubcategorySlugEn());
+        } catch (FeignException.NotFound e) {
+            throw new ApiException("Subcategory not found with slugEn: " + request.getSubcategorySlugEn(), HttpStatus.NOT_FOUND);
         }
 
         Product product = productMapper.toEntity(request);

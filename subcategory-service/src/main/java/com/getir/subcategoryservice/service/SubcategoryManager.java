@@ -1,7 +1,8 @@
 package com.getir.subcategoryservice.service;
 
+import com.getir.dto.SubcategoryResponse;
 import com.getir.subcategoryservice.dto.SubcategoryRequest;
-import com.getir.subcategoryservice.dto.SubcategoryResponse;
+
 import com.getir.subcategoryservice.entity.Subcategory;
 import com.getir.subcategoryservice.exceptions.ApiException;
 import com.getir.subcategoryservice.mapper.SubcategoryMapper;

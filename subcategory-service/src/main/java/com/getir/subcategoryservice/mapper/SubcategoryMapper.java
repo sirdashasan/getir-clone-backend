@@ -1,7 +1,8 @@
 package com.getir.subcategoryservice.mapper;
 
+import com.getir.dto.SubcategoryResponse;
 import com.getir.subcategoryservice.dto.SubcategoryRequest;
-import com.getir.subcategoryservice.dto.SubcategoryResponse;
+
 import com.getir.subcategoryservice.entity.Subcategory;
 import org.springframework.stereotype.Component;
 

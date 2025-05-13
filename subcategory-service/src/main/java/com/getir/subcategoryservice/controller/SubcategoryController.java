@@ -1,7 +1,8 @@
 package com.getir.subcategoryservice.controller;
 
+import com.getir.dto.SubcategoryResponse;
 import com.getir.subcategoryservice.dto.SubcategoryRequest;
-import com.getir.subcategoryservice.dto.SubcategoryResponse;
+
 import com.getir.subcategoryservice.service.SubcategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

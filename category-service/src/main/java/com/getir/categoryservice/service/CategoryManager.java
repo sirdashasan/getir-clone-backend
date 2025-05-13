@@ -1,11 +1,12 @@
 package com.getir.categoryservice.service;
 
 import com.getir.categoryservice.dto.CategoryRequest;
-import com.getir.categoryservice.dto.CategoryResponse;
+
 import com.getir.categoryservice.entity.Category;
 import com.getir.categoryservice.exceptions.ApiException;
 import com.getir.categoryservice.mapper.CategoryMapper;
 import com.getir.categoryservice.repository.CategoryRepository;
+import com.getir.dto.CategoryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

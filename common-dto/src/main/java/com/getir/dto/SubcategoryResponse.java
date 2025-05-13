@@ -1,4 +1,4 @@
-package com.getir.subcategoryservice.dto;
+package com.getir.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.getir.categoryservice.dto;
+package com.getir.dto;
 
 import lombok.*;
 
