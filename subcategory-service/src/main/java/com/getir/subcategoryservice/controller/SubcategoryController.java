@@ -35,17 +35,30 @@ public class SubcategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<SubcategoryResponse> create(@Valid @RequestBody SubcategoryRequest request) {
+    public ResponseEntity<SubcategoryResponse> create(@Valid @RequestBody SubcategoryRequest request,
+                                                      @RequestHeader("X-Role") String role) {
+        if (!"ROLE_ADMIN".equals(role)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         return new ResponseEntity<>(subcategoryService.createSubcategory(request), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SubcategoryResponse> update(@PathVariable UUID id,@Valid  @RequestBody SubcategoryRequest request) {
+    public ResponseEntity<SubcategoryResponse> update(@PathVariable UUID id,
+                                                      @Valid @RequestBody SubcategoryRequest request,
+                                                      @RequestHeader("X-Role") String role) {
+        if (!"ROLE_ADMIN".equals(role)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         return ResponseEntity.ok(subcategoryService.updateSubcategory(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable UUID id,
+                                       @RequestHeader("X-Role") String role) {
+        if (!"ROLE_ADMIN".equals(role)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         subcategoryService.deleteSubcategory(id);
         return ResponseEntity.noContent().build();
     }

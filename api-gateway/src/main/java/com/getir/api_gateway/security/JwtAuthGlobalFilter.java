@@ -7,6 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -20,12 +21,13 @@ public class JwtAuthGlobalFilter implements GlobalFilter, Ordered {
     private static final Dotenv dotenv = Dotenv.load();
     private static final Key key = Keys.hmacShaKeyFor(dotenv.get("JWT_SECRET").getBytes(StandardCharsets.UTF_8));
 
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, org.springframework.cloud.gateway.filter.GatewayFilterChain chain) {
-        String path = exchange.getRequest().getURI().getPath();
 
-        if (path.startsWith("/auth/register") || path.startsWith("/auth/login")) {
+        String path = exchange.getRequest().getURI().getPath();
+        HttpMethod method = exchange.getRequest().getMethod();
+
+        if (isPublicEndpoint(path, method)) {
             return chain.filter(exchange);
         }
 
@@ -36,7 +38,6 @@ public class JwtAuthGlobalFilter implements GlobalFilter, Ordered {
                 Claims claims = Jwts.parserBuilder().setSigningKey(key).build()
                         .parseClaimsJws(token)
                         .getBody();
-
 
                 ServerWebExchange mutatedExchange = exchange.mutate()
                         .request(builder -> builder
@@ -54,6 +55,17 @@ public class JwtAuthGlobalFilter implements GlobalFilter, Ordered {
 
         exchange.getResponse().setStatusCode(org.springframework.http.HttpStatus.UNAUTHORIZED);
         return exchange.getResponse().setComplete();
+    }
+
+    private boolean isPublicEndpoint(String path, HttpMethod method) {
+        return
+                path.startsWith("/getir/api/auth/register") ||
+                        path.startsWith("/getir/api/auth/login") ||
+                        (method == HttpMethod.GET && (
+                                path.startsWith("/getir/api/products") ||
+                                        path.startsWith("/getir/api/categories") ||
+                                        path.startsWith("/getir/api/subcategories")
+                        ));
     }
 
     @Override

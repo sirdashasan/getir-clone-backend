@@ -38,17 +38,33 @@ public class ProductController {
 
 
     @PostMapping
-    public ResponseEntity<ProductResponse> create(@Valid @RequestBody ProductRequest request) {
+    public ResponseEntity<ProductResponse> create(@Valid @RequestBody ProductRequest request,
+                                                  @RequestHeader("X-Role") String role) {
+        if (!"ROLE_ADMIN".equals(role)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
         return new ResponseEntity<>(productService.createProduct(request), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponse> update(@PathVariable UUID id, @Valid @RequestBody ProductRequest request) {
+    public ResponseEntity<ProductResponse> update(@PathVariable UUID id,
+                                                  @Valid @RequestBody ProductRequest request,
+                                                  @RequestHeader("X-Role") String role) {
+        if (!"ROLE_ADMIN".equals(role)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
         return ResponseEntity.ok(productService.updateProduct(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable UUID id,
+                                       @RequestHeader("X-Role") String role) {
+        if (!"ROLE_ADMIN".equals(role)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }

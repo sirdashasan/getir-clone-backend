@@ -37,17 +37,30 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> create(@Valid @RequestBody CategoryRequest request) {
+    public ResponseEntity<CategoryResponse> create(@Valid @RequestBody CategoryRequest request,
+                                                   @RequestHeader("X-Role") String role) {
+        if (!"ROLE_ADMIN".equals(role)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         return new ResponseEntity<>(categoryService.createCategory(request), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponse> update(@PathVariable UUID id, @Valid @RequestBody CategoryRequest request) {
+    public ResponseEntity<CategoryResponse> update(@PathVariable UUID id,
+                                                   @Valid @RequestBody CategoryRequest request,
+                                                   @RequestHeader("X-Role") String role) {
+        if (!"ROLE_ADMIN".equals(role)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         return ResponseEntity.ok(categoryService.updateCategory(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable UUID id,
+                                       @RequestHeader("X-Role") String role) {
+        if (!"ROLE_ADMIN".equals(role)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         categoryService.deleteCategory(id);
         return ResponseEntity.noContent().build();
     }
