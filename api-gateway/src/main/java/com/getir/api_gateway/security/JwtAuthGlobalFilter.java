@@ -1,4 +1,4 @@
-package com.getir.gatewayservice.security;
+package com.getir.api_gateway.security;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
