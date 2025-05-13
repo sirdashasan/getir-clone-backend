@@ -65,6 +65,16 @@ docker-compose up --build
 
 ```
 
+# ⚙️ Environment Configuration (.env Files)
+- **Root Directory:** 
+- - .env → Used for PostgreSQL container setup
+- ***api-gateway:***
+- - .env → Contains JWT_SECRET for token verification
+- ***auth-service:***
+- - .env → Contains DB connection details and JWT_SECRET
+- ***category-service, product-service, subcategory-service:***
+- - Each should include a .env file with database connection variables (DB_URL, DB_USERNAME, DB_PASSWORD)
+
 ## 🧱 Microservices List
 
 | Service            | Port  | Path Prefix       | Description                           |
