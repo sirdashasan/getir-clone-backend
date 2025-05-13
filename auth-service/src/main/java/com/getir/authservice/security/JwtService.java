@@ -1,9 +1,11 @@
-package com.getir.authservice.util;
+package com.getir.authservice.security;
 
 import com.getir.authservice.entity.User;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24; // 24 saat
+    private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24;
     private Key key;
 
     @PostConstruct
@@ -23,10 +25,10 @@ public class JwtService {
 
     public String generateToken(User user) {
         return Jwts.builder()
-                .subject(user.getEmail())
+                .setSubject(user.getEmail())
                 .claim("role", user.getRole().name())
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(key)
                 .compact();
     }

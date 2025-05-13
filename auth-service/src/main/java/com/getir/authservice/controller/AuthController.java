@@ -5,7 +5,7 @@ import com.getir.authservice.dto.JwtResponse;
 import com.getir.authservice.dto.RegisterRequest;
 import com.getir.authservice.entity.User;
 import com.getir.authservice.service.UserService;
-import com.getir.authservice.util.JwtService;
+import com.getir.authservice.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
