@@ -25,3 +25,8 @@ spring:
           uri: http://subcategory-service:8083
           predicates:
             - Path=/getir/api/subcategories/**
+
+        - id: auth-service
+          uri: http://auth-service:8084
+          predicates:
+            - Path=/getir/api/auth/**

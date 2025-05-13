@@ -49,6 +49,18 @@ services:
     env_file:
       - ./subcategory-service/.env
 
+  auth-service:
+      build:
+        context: ./auth-service
+      ports:
+        - "8084:8084"
+      image: auth-service
+      container_name: auth-service
+      depends_on:
+        - db
+      env_file:
+        - ./auth-service/.env
+
   api-gateway:
     build:
       context: ./api-gateway
