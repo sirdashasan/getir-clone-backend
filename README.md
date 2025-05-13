@@ -26,10 +26,21 @@ This is the **backend** of the Getir Clone project, designed with a clean micros
 
 ## 🚀 Technologies Used
 
-- **Java 17**, **Spring Boot**
-- **Spring Cloud Gateway**, **Spring Security**, **Feign**
+- **Java 17 & Spring Boot** 
+
+- **Spring MVC, Spring Data JPA, Spring Security, Spring Cloud Gateway**
+
+- **JWT, Role-Based Access Control**
+
+- **Feign Client**
+
 - **PostgreSQL**
-- **Docker** & Docker Compose
+
+- **Docker & Docker Compose**
+
+- **Maven**
+
+- **Lombok, dotenv-java** 
 
 
 ## 🐳 Installation & Running
