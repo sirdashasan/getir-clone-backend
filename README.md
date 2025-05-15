@@ -2,6 +2,8 @@
 
 This is the **backend** of the Getir Clone project, designed with a clean microservices architecture using **Spring Boot** and **Spring Cloud**. Each core domain (Product, Category, Subcategory, Auth) is implemented as an independent service, communicating via **Feign Clients** and exposed through a centralized **API Gateway**.
 
+👉 You can view the [React-based frontend of this project here](https://github.com/sirdashasan/getir-clone).
+
 ## ⚙️ Architecture Overview
 
 - 🧱 **Microservices**:
