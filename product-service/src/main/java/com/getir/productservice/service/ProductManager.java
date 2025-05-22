@@ -1,6 +1,6 @@
 package com.getir.productservice.service;
 
-import com.getir.dto.CategoryResponse;
+import com.getir.dto.ProductCreatedEvent;
 import com.getir.productservice.dto.ProductRequest;
 import com.getir.productservice.dto.ProductResponse;
 import com.getir.productservice.entity.Product;
@@ -11,12 +11,16 @@ import com.getir.productservice.service.client.CategoryClient;
 import com.getir.productservice.service.client.SubcategoryClient;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static com.getir.productservice.config.RabbitMQConfig.EXCHANGE;
+import static com.getir.productservice.config.RabbitMQConfig.ROUTING_KEY;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +30,8 @@ public class ProductManager implements ProductService {
     private final ProductMapper productMapper;
     private final CategoryClient categoryClient;
     private final SubcategoryClient subcategoryClient;
+
+    private final RabbitTemplate rabbitTemplate;
 
     @Override
     public List<ProductResponse> getAllProducts() {
@@ -90,6 +96,24 @@ public class ProductManager implements ProductService {
 
         Product product = productMapper.toEntity(request);
         Product saved = productRepository.save(product);
+
+        // RabbitMQ
+        ProductCreatedEvent event = ProductCreatedEvent.builder()
+                .productId(saved.getId().toString())
+                .nameTr(saved.getNameTr())
+                .nameEn(saved.getNameEn())
+                .categorySlugTr(saved.getCategorySlugTr())
+                .categorySlugEn(saved.getCategorySlugEn())
+                .subcategorySlugTr(saved.getSubcategorySlugTr())
+                .subcategorySlugEn(saved.getSubcategorySlugEn())
+                .quantity(saved.getQuantity())
+                .build();
+
+        rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, event);
+
+
+
+
         return productMapper.toResponse(saved);
     }
 

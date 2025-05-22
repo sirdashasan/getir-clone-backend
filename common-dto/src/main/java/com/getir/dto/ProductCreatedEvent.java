@@ -1,12 +1,14 @@
-package com.getir.stockservice.dto;
+package com.getir.dto;
 
 import lombok.*;
+
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductCreatedEvent {
+public class ProductCreatedEvent implements Serializable {
     private String productId;
     private String nameTr;
     private String nameEn;

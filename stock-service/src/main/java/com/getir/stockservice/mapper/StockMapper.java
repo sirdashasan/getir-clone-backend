@@ -1,6 +1,6 @@
 package com.getir.stockservice.mapper;
 
-import com.getir.stockservice.dto.ProductCreatedEvent;
+import com.getir.dto.ProductCreatedEvent;
 import com.getir.stockservice.dto.StockResponse;
 import com.getir.stockservice.entity.Stock;
 import org.springframework.stereotype.Component;

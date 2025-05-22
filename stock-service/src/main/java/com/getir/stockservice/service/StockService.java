@@ -1,6 +1,7 @@
 package com.getir.stockservice.service;
 
-import com.getir.stockservice.dto.ProductCreatedEvent;
+
+import com.getir.dto.ProductCreatedEvent;
 
 public interface StockService {
     void createStock(ProductCreatedEvent event);

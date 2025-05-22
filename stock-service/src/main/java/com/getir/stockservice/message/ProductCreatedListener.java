@@ -1,6 +1,7 @@
 package com.getir.stockservice.message;
 
-import com.getir.stockservice.dto.ProductCreatedEvent;
+
+import com.getir.dto.ProductCreatedEvent;
 import com.getir.stockservice.service.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
