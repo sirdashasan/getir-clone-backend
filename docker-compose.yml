@@ -73,6 +73,16 @@ services:
     env_file:
       - ./stock-service/.env
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"     # AMQP port (for apps)
+      - "15672:15672"   # Web UI port
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
   api-gateway:
     build:
       context: ./api-gateway
@@ -90,3 +100,4 @@ services:
 
 volumes:
   postgres_data:
+
