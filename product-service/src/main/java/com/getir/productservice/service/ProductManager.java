@@ -1,6 +1,8 @@
 package com.getir.productservice.service;
 
 import com.getir.dto.ProductCreatedEvent;
+import com.getir.dto.ProductDeletedEvent;
+import com.getir.productservice.config.RabbitMQConfig;
 import com.getir.productservice.dto.ProductRequest;
 import com.getir.productservice.dto.ProductResponse;
 import com.getir.productservice.entity.Product;
@@ -131,6 +133,16 @@ public class ProductManager implements ProductService {
         if (!exists) {
             throw new ApiException("Product not found with id: " + id, HttpStatus.NOT_FOUND);
         }
+
+        // rabbitmq
+        ProductDeletedEvent event = new ProductDeletedEvent(id.toString());
+        rabbitTemplate.convertAndSend(
+                RabbitMQConfig.EXCHANGE,
+                RabbitMQConfig.PRODUCT_DELETED_ROUTING_KEY,
+                event
+        );
+
         productRepository.deleteById(id);
     }
+
 }

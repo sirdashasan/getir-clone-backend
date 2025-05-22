@@ -14,6 +14,8 @@ public class RabbitMQConfig {
     public static final String EXCHANGE = "product.exchange";
     public static final String QUEUE = "product-created-queue";
     public static final String ROUTING_KEY = "product.created";
+    public static final String PRODUCT_DELETED_QUEUE = "product-deleted-queue";
+    public static final String PRODUCT_DELETED_ROUTING_KEY = "product.deleted";
 
     @Bean
     public TopicExchange exchange() {
@@ -47,5 +49,18 @@ public class RabbitMQConfig {
         factory.setMessageConverter(messageConverter());
         factory.setDefaultRequeueRejected(false);
         return factory;
+    }
+
+    @Bean
+    public Queue deletedQueue() {
+        return new Queue(PRODUCT_DELETED_QUEUE);
+    }
+
+    @Bean
+    public Binding deletedBinding(Queue deletedQueue, TopicExchange exchange) {
+        return BindingBuilder
+                .bind(deletedQueue)
+                .to(exchange)
+                .with(PRODUCT_DELETED_ROUTING_KEY);
     }
 }

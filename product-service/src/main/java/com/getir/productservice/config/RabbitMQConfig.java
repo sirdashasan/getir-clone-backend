@@ -12,6 +12,7 @@ public class RabbitMQConfig {
 
     public static final String EXCHANGE = "product.exchange";
     public static final String ROUTING_KEY = "product.created";
+    public static final String PRODUCT_DELETED_ROUTING_KEY = "product.deleted";
 
     @Bean
     public TopicExchange exchange() {
