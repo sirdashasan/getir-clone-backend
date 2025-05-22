@@ -11,11 +11,13 @@ This is the **backend** of the Getir Clone project, designed with a clean micros
     - `category-service`: Manages product categories.
     - `subcategory-service`: Handles subcategory logic with category relationships.
     - `auth-service`: Handles user authentication and authorization with JWT.
+    - `stock-service`: Manages stock creation and deletion based on product lifecycle events.
 - 🌐 **API Gateway**:
     - Centralized routing via **Spring Cloud Gateway**
     - Filters requests with a custom `JwtAuthGlobalFilter`
 - 🔗 **Service Communication**:
     - **Feign Clients** used for inter-service validation (e.g., product → category)
+    - **RabbitMQ** used for asynchronous communication between `product-service` and `stock-service`
 - 🔒 **Security**:
     - JWT-based authentication
     - Role-based access control (`ROLE_USER`, `ROLE_ADMIN`) via API Gateway
@@ -38,7 +40,7 @@ This is the **backend** of the Getir Clone project, designed with a clean micros
 
 - **PostgreSQL**
 
-- **Docker & Docker Compose**
+- **RabbitMQ, Docker & Docker Compose**
 
 - **Maven**
 
@@ -68,6 +70,9 @@ mvn clean install -DskipTests
 cd ../product-service
 mvn clean install -DskipTests
 
+cd ../stock-service
+mvn clean install -DskipTests
+
 cd ../api-gateway
 mvn clean install -DskipTests
 
@@ -82,7 +87,7 @@ docker-compose up --build
 - **Root Directory:** .env → Used for PostgreSQL container setup
 - ***api-gateway:*** .env → Contains JWT_SECRET for token verification
 - ***auth-service:*** .env → Contains DB connection details and JWT_SECRET
-- ***category-service, product-service, subcategory-service:*** Each should include a .env file with database connection variables (DB_URL, DB_USERNAME, DB_PASSWORD)
+- ***category-service, product-service, subcategory-service, stock-service:*** Each should include a .env file with database connection variables (DB_URL, DB_USERNAME, DB_PASSWORD)
 
 ## 🧱 Microservices List
 
@@ -92,4 +97,5 @@ docker-compose up --build
 | `product-service`  | 8081  | `/getir/api/products` | Product management with category/subcategory validation |
 | `category-service` | 8082  | `/getir/api/categories` | Handles CRUD for categories          |
 | `subcategory-service` | 8083 | `/getir/api/subcategories` | CRUD for subcategories with linkage  |
+| `stock-service`     | 8085  | `/getir/api/stocks` | Handles stock creation/deletion via RabbitMQ |
 | `api-gateway`      | 8080  | `/`               | Routes all requests to target services |
