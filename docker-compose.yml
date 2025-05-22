@@ -61,6 +61,18 @@ services:
       env_file:
         - ./auth-service/.env
 
+  stock-service:
+    build:
+      context: ./stock-service
+    ports:
+      - "8085:8085"
+    image: stock-service
+    container_name: stock-service
+    depends_on:
+      - db
+    env_file:
+      - ./stock-service/.env
+
   api-gateway:
     build:
       context: ./api-gateway

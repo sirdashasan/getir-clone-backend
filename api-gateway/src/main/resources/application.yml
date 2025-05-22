@@ -30,3 +30,8 @@ spring:
           uri: http://auth-service:8084
           predicates:
             - Path=/getir/api/auth/**
+
+        - id: stock-service
+          uri: http://stock-service:8085
+          predicates:
+            - Path=/getir/api/stocks/**
