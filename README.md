@@ -36,11 +36,11 @@ This is the **backend** of the Getir Clone project, designed with a clean micros
 
 - **JWT, Role-Based Access Control**
 
-- **Feign Client**
+- **Feign Client, RabbitMQ**
 
 - **PostgreSQL**
 
-- **RabbitMQ, Docker & Docker Compose**
+- **Docker & Docker Compose**
 
 - **Maven**
 
